@@ -1,0 +1,28 @@
+#!/bin/sh
+
+# source the management script
+. "$SNAP/bin/management.sh"
+
+handle_hostname_config() {
+  hostname="$(get_hostname)"
+
+ # run function from management script
+  set_hostname "$hostname"
+
+  # Restart example-server to apply new config
+}
+
+handle_verify_clients() {
+  vc="$(get_verify_clients)"
+  if [ "$value" != "true" ] && [ "$value" != "false" ]; then
+    echo "verify-clients must be either 'true' or 'false'"
+    return 1
+  fi
+  set_verify_clients "$vc"
+}
+
+handle_hostname_config
+
+handle_verify_clients
+
+snapctl restart derper

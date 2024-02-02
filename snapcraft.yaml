@@ -1,0 +1,44 @@
+name: derper
+summary: DERP Relay Server for Tailscale
+description: |
+  Self hosted DERP Relay servers for Tailscale networks. This snap provides a simple way to run your own DERP servers to route your tailscale traffic through your own relay servers.
+version: v1.58.2
+grade: devel
+base: core22
+
+confinement: strict
+
+layout:
+  /var/lib/derper:
+    bind: $SNAP_DATA/var/lib/derper
+
+apps:
+  derper-service:
+    command: bin/derper-runner
+    daemon: simple
+    plugs:
+      - network
+      - network-bind
+
+  derper:
+    command: bin/derper
+    plugs:
+      - network
+      - network-bind
+
+parts:
+  derper:
+    plugin: go
+    source-type: git
+    source-tag: v1.58.2
+    source: https://github.com/tailscale/tailscale/
+    build-snaps:
+    - go
+    override-build: | 
+      cd cmd/derper
+      go build .
+      mkdir $CRAFT_PART_INSTALL/bin/
+      cp derper $CRAFT_PART_INSTALL/bin/derper
+  files:
+    plugin: dump
+    source: .

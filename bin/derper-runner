@@ -1,0 +1,12 @@
+#!/bin/sh
+# source the management script
+. "$SNAP/bin/management.sh"
+
+HOSTNAME="$(get_hostname)"
+
+VERIFY_CLIENTS=""
+if [ "$(get_verify_clients)" = "true" ]; then
+  VERIFY_CLIENTS="-verify-clients"
+fi
+
+"$SNAP/bin/derper" -hostname "$HOSTNAME" "$VERIFY_CLIENTS"
