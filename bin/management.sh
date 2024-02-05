@@ -1,4 +1,6 @@
-#!/bin/sh
+#!/bin/bash
+
+set -euo pipefail
 
 DEFAULT_HOSTNAME="$(hostname)"
 DEFAULT_VERIFY_CLIENTS="true"

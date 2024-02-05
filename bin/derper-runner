@@ -1,12 +1,25 @@
-#!/bin/sh
+#!/bin/bash
+set -euo pipefail
+
 # source the management script
 . "$SNAP/bin/management.sh"
 
-HOSTNAME="$(get_hostname)"
+PARAMETERS=""
+PARAMETERS+="-hostname $(get_hostname)"
 
-VERIFY_CLIENTS=""
 if [ "$(get_verify_clients)" = "true" ]; then
-  VERIFY_CLIENTS="-verify-clients"
+  PARAMETERS+=" -verify-clients"
 fi
 
-"$SNAP/bin/derper" -hostname "$HOSTNAME" "$VERIFY_CLIENTS"
+ADDR=$(snapctl get address)
+if [[ -n "$ADDR" ]]; then
+  PARAMETERS+=" -a $ADDR"
+fi
+
+STUN=$(snapctl get stun-port)
+if [[ -n "$STUN" ]]; then
+  PARAMETERS+=" -stun-port $STUN"
+fi
+
+echo "Running: $SNAP/bin/derper ${PARAMETERS}"
+"$SNAP/bin/derper" $PARAMETERS

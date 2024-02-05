@@ -2,6 +2,12 @@ name: derper
 summary: DERP Relay Server for Tailscale
 description: |
   Self hosted DERP Relay servers for Tailscale networks. This snap provides a simple way to run your own DERP servers to route your tailscale traffic through your own relay servers.
+  The following configuration options are currently supported.
+  - hostname, defaults to `hostname -f`
+  - verify-clients, defaults to true
+  - stun-port
+  - address
+  Please refer to `derper -h` and the upstream documentation at https://tailscale.com/kb/1118/custom-derp-servers for explanations.
 version: v1.58.2
 grade: devel
 base: core22
