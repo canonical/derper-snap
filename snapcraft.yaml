@@ -8,7 +8,7 @@ description: |
   - stun-port
   - address
   Please refer to `derper -h` and the upstream documentation at https://tailscale.com/kb/1118/custom-derp-servers for explanations.
-version: v1.58.2
+version: v1.58.2-1
 grade: devel
 base: core22
 
