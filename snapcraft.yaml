@@ -18,6 +18,14 @@ layout:
   /var/lib/derper:
     bind: $SNAP_DATA/var/lib/derper
 
+plugs:
+  var-run-tailscale:
+    interface: system-files
+    read:
+    - /run/tailscale/tailscaled.sock
+    write:
+    - /run/tailscale/tailscaled.sock
+
 apps:
   derper-service:
     command: bin/derper-runner
@@ -25,12 +33,14 @@ apps:
     plugs:
       - network
       - network-bind
+      - var-run-tailscale
 
   derper:
     command: bin/derper
     plugs:
       - network
       - network-bind
+      - var-run-tailscale
 
 parts:
   derper:
@@ -41,10 +51,8 @@ parts:
     build-snaps:
     - go
     override-build: | 
-      cd cmd/derper
-      go build .
-      mkdir $CRAFT_PART_INSTALL/bin/
-      cp derper $CRAFT_PART_INSTALL/bin/derper
+      go mod download all
+      go install -p $CRAFT_PARALLEL_BUILD_COUNT ./cmd/derper
   files:
     plugin: dump
     source: .
