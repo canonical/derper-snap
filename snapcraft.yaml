@@ -8,8 +8,8 @@ description: |
   - stun-port
   - address
   Please refer to `derper -h` and the upstream documentation at https://tailscale.com/kb/1118/custom-derp-servers for explanations.
-version: v1.58.2-1
-grade: devel
+version: v1.60.0-1
+grade: stable
 base: core22
 
 confinement: strict
@@ -46,7 +46,7 @@ parts:
   derper:
     plugin: go
     source-type: git
-    source-tag: v1.58.2
+    source-tag: v1.60.0
     source: https://github.com/tailscale/tailscale/
     build-snaps:
     - go
