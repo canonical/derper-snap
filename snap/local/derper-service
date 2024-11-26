@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Build the argument list from snap config
+args=()
+
+# add a `-option <value>`
+add_option() {
+    key=$1
+    value="$(snapctl get "$key")"
+    [ -n "$value" ] && args+=("--$key=$value")
+}
+
+# add a `-flag`
+add_flag() {
+    key=$1
+    [ "$(snapctl get "$key")" = "true" ] && args+=("-$key")
+}
+
+add_option hostname
+add_flag verify-clients
+
+exec "${SNAP}/bin/derper" "${args[@]}"

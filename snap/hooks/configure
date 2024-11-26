@@ -1,25 +1,21 @@
-#!/bin/bash
-set -euo pipefail
+#!/bin/sh -e
 
-# source the management script
-. "$SNAP/bin/management.sh"
+# Register config variables if unset,
+# so users can see available variables by running
+# `sudo snap get derper`.
+[ -z "$(snapctl get hostname)" ] && snapctl set hostname=
+[ -z "$(snapctl get verify-clients)" ] && snapctl set verify-clients=false
 
-handle_hostname_config() {
-  hostname="$(get_hostname)"
-  set_hostname "$hostname"
+
+validate_bool() {
+    key="$1"
+    value="$(snapctl get "$key")"
+    if [ "$value" != "true" ] && [ "$value" != "false" ]
+    then
+        echo "\"$key\" is not a valid boolean value (must be \"true\" or \"false\")" >&2
+        exit 1
+    fi
 }
 
-handle_verify_clients() {
-  vc="$(get_verify_clients)"
-  if [ "$vc" != "true" ] && [ "$vc" != "false" ]; then
-    echo "verify-clients must be either 'true' or 'false'"
-    return 1
-  fi
-  set_verify_clients "$vc"
-}
 
-handle_hostname_config
-
-handle_verify_clients
-
-snapctl restart derper
+validate_bool verify-clients
