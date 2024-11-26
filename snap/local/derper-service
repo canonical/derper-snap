@@ -7,7 +7,7 @@ args=()
 add_option() {
     key=$1
     value="$(snapctl get "$key")"
-    [ -n "$value" ] && args+=("--$key=$value")
+    [ -n "$value" ] && args+=("-$key=$value")
 }
 
 # add a `-flag`
@@ -16,7 +16,9 @@ add_flag() {
     [ "$(snapctl get "$key")" = "true" ] && args+=("-$key")
 }
 
+add_option a
 add_option hostname
+add_option stun-port
 add_flag verify-clients
 
 exec "${SNAP}/bin/derper" "${args[@]}"
