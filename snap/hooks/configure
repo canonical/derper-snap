@@ -3,7 +3,9 @@
 # Register config variables if unset,
 # so users can see available variables by running
 # `sudo snap get derper`.
+[ -z "$(snapctl get a)" ] && snapctl set a=
 [ -z "$(snapctl get hostname)" ] && snapctl set hostname=
+[ -z "$(snapctl get stun-port)" ] && snapctl set stun-port=
 [ -z "$(snapctl get verify-clients)" ] && snapctl set verify-clients=false
 
 
