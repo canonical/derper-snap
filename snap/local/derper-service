@@ -19,6 +19,7 @@ add_flag() {
 add_option a
 add_option hostname
 add_option stun-port
+add_flag verify-clients
 
 # Hardcoding config file path, as it defaults to /var/lib/derper/derper.key otherwise.
 exec "${SNAP}/bin/derper" -c "$SNAP_COMMON/derper.key" "${args[@]}"
