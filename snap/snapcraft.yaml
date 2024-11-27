@@ -17,6 +17,15 @@ platforms:
   arm64:
   armhf:
 
+plugs:
+  # to connect to tailscale for verify-clients mode:
+  # $ sudo snap connect derper:tailscale-socket tailscale:socket
+  tailscale-socket:
+    interface: content
+    content: socket-directory
+    # will be available to derper as $SNAP_DATA/tailscale-socket/tailscaled.sock
+    target: $SNAP_DATA/tailscale-socket
+
 apps:
   derper:
     command: bin/derper-service
