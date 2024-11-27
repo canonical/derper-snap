@@ -6,6 +6,7 @@
 [ -z "$(snapctl get a)" ] && snapctl set a=
 [ -z "$(snapctl get hostname)" ] && snapctl set hostname=
 [ -z "$(snapctl get stun-port)" ] && snapctl set stun-port=
+[ -z "$(snapctl get verify-clients)" ] && snapctl set verify-clients=false
 
 
 # For validating boolean options that must be "true" or "false"
@@ -21,3 +22,7 @@ validate_bool() {
         exit 1
     fi
 }
+
+# TODO: for verify-clients, also verify that the connection to tailscale is present if setting the value to true.
+# Otherwise, fail and recommend the user run `sudo snap connect derper:tailscale-socket tailscale:socket`
+validate_bool verify-clients
