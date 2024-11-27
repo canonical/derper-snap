@@ -27,7 +27,6 @@ You can modify configuration options with `sudo snap set`. The following configu
 | `hostname`       | ("derp.tailscale.com") | LetsEncrypt host name, if addr's (`a`) port is :443 |
 | `a`              | (":443") | server HTTP/HTTPS listen address, in form ":port", "ip:port", or for IPv6 "[ip]:port". If the IP is omitted, it defaults to all interfaces. Serves HTTPS if the port is 443 and/or certmode is manual (default certmode is "letsencrypt", otherwise HTTP. |
 | `stun-port`      | ("3478") | The UDP port on which to serve STUN. The listener is bound to the same IP (if any) as specified in the `a` option. |
-| `verify-clients` | false | verify clients to this DERP server through a local tailscaled instance |
 
 The config options correspond to the similarly named command line flags to `derper`.
 Options that don't have support to be configured through the snap
@@ -46,7 +45,7 @@ To view the available config options and their current values:
 $ sudo snap get derper
 Key             Value
 hostname
-verify-clients  false
+a               127.0.0.1:443
 ...
 ```
 
