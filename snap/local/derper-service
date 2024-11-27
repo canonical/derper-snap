@@ -19,5 +19,6 @@ add_flag() {
 add_option a
 add_option hostname
 add_option stun-port
+add_flag verify-clients
 
 exec "${SNAP}/bin/derper" "${args[@]}"
