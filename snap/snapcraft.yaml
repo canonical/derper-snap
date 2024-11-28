@@ -17,11 +17,6 @@ platforms:
   arm64:
   armhf:
 
-# TODO: do we need this? is this just for the /var/lib/derper/derper.key config file default?
-layout:
-  /var/lib/derper:
-    bind: $SNAP_DATA/var/lib/derper
-
 apps:
   derper:
     command: bin/derper-service
