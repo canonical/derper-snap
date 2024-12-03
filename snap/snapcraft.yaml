@@ -6,6 +6,7 @@ grade: stable
 confinement: strict
 contact: solutions-engineering@lists.canonical.com
 issues: https://github.com/canonical/derper-snap/issues
+source-code: https://github.com/canonical/derper-snap
 summary: DERP Server for Tailscale
 description: |
   Derper is a self hosted DERP (Designated Encrypted Relay for Packets) server, designed to be used with Tailscale.
@@ -17,9 +18,7 @@ description: |
 
   Install the snap:
 
-  ```bash
-  sudo snap install derper
-  ```
+     sudo snap install derper
 
   This installs the DERP server and starts it automatically.
   You will likely need to configure the service:
@@ -39,25 +38,19 @@ description: |
 
   Example of setting an option:
 
-  ```bash
-  sudo snap set derper hostname=myderper.mydomain.com
-  ```
+     sudo snap set derper hostname=myderper.mydomain.com
 
   To view the available config options and their current values:
 
-  ```
-  $ sudo snap get derper
-  Key             Value
-  hostname
-  a               127.0.0.1:443
-  ...
-  ```
+     $ sudo snap get derper
+     Key             Value
+     hostname
+     a               127.0.0.1:443
+     ...
 
   Derper must be restarted manually for the changed config to take affect:
 
-  ```
-  sudo snap restart derper
-  ```
+     sudo snap restart derper
 
   **Security**
 
