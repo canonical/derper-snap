@@ -19,6 +19,17 @@ The locally built snap must be installed in dangerous mode (because there are no
 sudo snap install --dangerous derper_*.snap
 ```
 
+A trick to directly interact with the `derper` command,
+useful for debugging:
+
+```
+$ sudo snap run --shell derper
+root@derper:/home/ubuntu# derper -h
+Usage of derper:
+  -a string
+  ...
+```
+
 ## License
 
 This packaging repository is released under the BSD 3-Clause "New" or "Revised" license.
