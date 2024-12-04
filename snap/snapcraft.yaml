@@ -68,6 +68,8 @@ description: |
   The snap logic does not use any cryptographic functionality directly;
   it simply provides a managed way to configure the derper service, by providing some scripts and interacting with `snapctl`.
 
+  On first run, derper generates a secret key and writes it to file at `$SNAP_DATA/derper.key`. This file is only readable or writeable by the root user.
+  Note that derper refers to this file as the config file.
 
 platforms:
   amd64:
