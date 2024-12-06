@@ -21,4 +21,4 @@ add_option hostname
 add_option stun-port
 
 # Hardcoding config file path, as it defaults to /var/lib/derper/derper.key otherwise.
-exec "${SNAP}/bin/derper" -c "$SNAP_DATA/derper.key" "${args[@]}"
+exec "${SNAP}/bin/derper" -c "$SNAP_COMMON/derper.key" "${args[@]}"
