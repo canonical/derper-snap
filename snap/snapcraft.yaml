@@ -73,6 +73,7 @@ description: |
 
 platforms:
   amd64:
+  arm64:
 
 apps:
   derper:
