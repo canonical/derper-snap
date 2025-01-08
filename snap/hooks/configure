@@ -8,6 +8,10 @@
 [ -z "$(snapctl get stun-port)" ] && snapctl set stun-port=
 
 
+# For validating boolean options that must be "true" or "false"
+# (used in the service wrapper to determine which flags to pass).
+# eg: `validate_bool verify-clients`
+# We'll use this when we add the verify-clients option at least.
 validate_bool() {
     key="$1"
     value="$(snapctl get "$key")"
@@ -17,6 +21,3 @@ validate_bool() {
         exit 1
     fi
 }
-
-
-validate_bool verify-clients
