@@ -17,6 +17,10 @@ it simply provides a managed way to configure the derper service, by providing s
 On first run, derper generates a secret key and writes it to file at `$SNAP_COMMON/derper.key`. This file is only readable or writeable by the root user.
 Note that derper refers to this file as the config file.
 
+WARNING: Derper acts as an open relay by default,
+and the snap does not currently support the `--verify-clients` mode that can restrict traffic to your tailnet.
+Please see https://github.com/canonical/derper-snap/pull/4 for more information and the work in progress.
+
 ## Security hardening guidance
 
 ### Listen address and protocol
