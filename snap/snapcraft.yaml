@@ -12,7 +12,11 @@ description: |
   Derper is a self hosted DERP (Designated Encrypted Relay for Packets) server, designed to be used with Tailscale.
   This snap provides a simple and secure way to run your own DERP servers to route your tailscale traffic through your own relay servers.
 
-  Please refer to the upstream documentation at https://tailscale.com/kb/1118/custom-derp-servers and https://tailscale.com/kb/1232/derp-servers for more information.
+  Please refer to the upstream documentation for more information:
+
+  * https://tailscale.com/kb/1118/custom-derp-servers
+  * https://tailscale.com/kb/1232/derp-servers
+  * https://github.com/tailscale/tailscale/blob/main/cmd/derper/README.md
 
   **Usage**
 
