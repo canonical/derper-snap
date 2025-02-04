@@ -56,7 +56,10 @@ description: |
 
      sudo snap restart derper
 
-  For security documentation, please see https://github.com/canonical/derper-snap/blob/main/docs/security.md
+  **Security**
+
+  See https://github.com/canonical/derper-snap/blob/main/docs/security-reference.md
+  for security and hardening documentation.
 
 platforms:
   amd64:
