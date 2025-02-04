@@ -1,4 +1,3 @@
-
 # Security
 
 Derper provides a way to negotiate direct connections between devices running tailscale,
@@ -20,6 +19,8 @@ Note that derper refers to this file as the config file.
 
 ## Security hardening guidance
 
+### Listen address and protocol
+
 With the default snap config of `a` (the server listen address),
 Derper will listen on port 443, and request a certificate from Letsencrypt to use HTTPS.
 If the listen port is changed to something other than 443,
@@ -32,3 +33,11 @@ For example:
 ```
 sudo snap set derper a=10.0.0.3:443
 ```
+
+### Open relay warning
+
+By default, Derper runs as an open relay.
+Derper does make it possible to restrict access to traffic on your tailnet only,
+by using its `--verify-clients` mode.
+However, this is not currently supported by the snap.
+Please see https://github.com/canonical/derper-snap/pull/4 for more information and the work in progress.
