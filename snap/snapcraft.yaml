@@ -58,6 +58,14 @@ description: |
 
      sudo snap restart derper
 
+  To run in `verify-clients` mode, the tailscale snap must also be installed,
+  and the two snaps connected over the custom content interface so the control socket is shared:
+
+     sudo snap install derper
+     sudo snap install tailscale
+     sudo snap connect derper:tailscale-socket tailscale:socket
+     sudo snap set derper verify-clients=true
+
   **Security**
 
   See https://github.com/canonical/derper-snap/blob/main/docs/security-reference.md

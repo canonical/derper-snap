@@ -21,5 +21,6 @@ add_option hostname
 add_option stun-port
 add_flag verify-clients
 
-# Hardcoding config file path, as it defaults to /var/lib/derper/derper.key otherwise.
-exec "${SNAP}/bin/derper" -c "$SNAP_COMMON/derper.key" "${args[@]}"
+# Hardcode the config file path, as it defaults to /var/lib/derper/derper.key otherwise.
+# Also hardcode the tailscaled socket path; this path is present if the tailscale-socket plug is connected.
+exec "${SNAP}/bin/derper" "-c=$SNAP_COMMON/derper.key" "-socket=$SNAP_DATA/tailscale-socket/tailscaled.sock" "${args[@]}"

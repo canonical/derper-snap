@@ -23,6 +23,4 @@ validate_bool() {
     fi
 }
 
-# TODO: for verify-clients, also verify that the connection to tailscale is present if setting the value to true.
-# Otherwise, fail and recommend the user run `sudo snap connect derper:tailscale-socket tailscale:socket`
 validate_bool verify-clients
