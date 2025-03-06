@@ -12,7 +12,11 @@ description: |
   Derper is a self hosted DERP (Designated Encrypted Relay for Packets) server, designed to be used with Tailscale.
   This snap provides a simple and secure way to run your own DERP servers to route your tailscale traffic through your own relay servers.
 
-  Please refer to the upstream documentation at https://tailscale.com/kb/1118/custom-derp-servers and https://tailscale.com/kb/1232/derp-servers for more information.
+  Please refer to the upstream documentation for more information:
+
+  * https://tailscale.com/kb/1118/custom-derp-servers
+  * https://tailscale.com/kb/1232/derp-servers
+  * https://github.com/tailscale/tailscale/blob/main/cmd/derper/README.md
 
   **Usage**
 
@@ -54,22 +58,8 @@ description: |
 
   **Security**
 
-  Derper provides a way to negotiate direct connections between devices running tailscale,
-  or acting as a full relay server if no direct connection is possible.
-  Derper never sees the content of traffic it relays, as all data is end to end encrypted already by Tailscale using Wireguard on the end devices.
-  Please see the upstream documentation for more security information about derper.
-
-  The snap is strictly confined, with interfaces limited to:
-
-  * `network`: general network access.
-  * `network-bind`: required for the service to listen on an interface.
-
-  This snap has some thin wrapper logic around derper
-  The snap logic does not use any cryptographic functionality directly;
-  it simply provides a managed way to configure the derper service, by providing some scripts and interacting with `snapctl`.
-
-  On first run, derper generates a secret key and writes it to file at `$SNAP_COMMON/derper.key`. This file is only readable or writeable by the root user.
-  Note that derper refers to this file as the config file.
+  See https://github.com/canonical/derper-snap/blob/main/docs/security-reference.md
+  for security and hardening documentation.
 
 platforms:
   amd64:
