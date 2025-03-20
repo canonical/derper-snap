@@ -1,6 +1,6 @@
 name: derper
 base: core24
-version: 1.78.3
+version: 1.80.2
 license: BSD-3-Clause
 grade: stable
 confinement: strict
@@ -60,6 +60,8 @@ description: |
 
   See https://github.com/canonical/derper-snap/blob/main/docs/security-reference.md
   for security and hardening documentation.
+
+  This snap is maintained by Canonical, and is not necessarily endorsed or officially maintained by the upstream developers.
 
 platforms:
   amd64:
