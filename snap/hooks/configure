@@ -6,6 +6,7 @@
 [ -z "$(snapctl get a)" ] && snapctl set a=
 [ -z "$(snapctl get hostname)" ] && snapctl set hostname=
 [ -z "$(snapctl get stun-port)" ] && snapctl set stun-port=
+[ -z "$(snapctl get verify-clients)" ] && snapctl set verify-clients=false
 
 
 # For validating boolean options that must be "true" or "false"
@@ -21,3 +22,5 @@ validate_bool() {
         exit 1
     fi
 }
+
+validate_bool verify-clients
