@@ -65,6 +65,7 @@ description: |
      sudo snap install tailscale
      sudo snap connect derper:tailscale-socket tailscale:socket
      sudo snap set derper verify-clients=true
+     sudo snap restart derper
 
   **Security**
 
