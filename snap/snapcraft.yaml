@@ -34,6 +34,7 @@ description: |
   * `hostname`: LetsEncrypt host name, if addr's (`a`) port is :443. (default if unset: "derp.tailscale.com")
   * `a`: server HTTP/HTTPS listen address, in form ":port", "ip:port", or for IPv6 "[ip]:port". If the IP is omitted, it defaults to all interfaces. Serves HTTPS if the port is 443 and/or certmode is manual (default certmode is "letsencrypt"), otherwise HTTP. (default if unset: ":443")
   * `stun-port`: The UDP port on which to serve STUN. The listener is bound to the same IP (if any) as specified in the `a` option. (default if unset: "3478")
+  * `verify-clients`: Verify clients to this DERP server through a local tailscaled instance. Must be "true" or "false". (default if unset: "false")
 
   The config options correspond to the similarly named command line flags for `derper`.
 
@@ -50,10 +51,20 @@ description: |
      Key             Value
      hostname
      a               127.0.0.1:443
+     verify-clients  false
      ...
 
   Derper must be restarted manually for the changed config to take affect:
 
+     sudo snap restart derper
+
+  To run in `verify-clients` mode, the tailscale snap must also be installed,
+  and the two snaps connected over the custom content interface so the control socket is shared:
+
+     sudo snap install derper
+     sudo snap install tailscale
+     sudo snap connect derper:tailscale-socket tailscale:socket
+     sudo snap set derper verify-clients=true
      sudo snap restart derper
 
   **Security**
@@ -66,6 +77,15 @@ description: |
 platforms:
   amd64:
   arm64:
+
+plugs:
+  # to connect to tailscale for verify-clients mode:
+  # $ sudo snap connect derper:tailscale-socket tailscale:socket
+  tailscale-socket:
+    interface: content
+    content: socket-directory
+    # will be available to derper as $SNAP_DATA/tailscale-socket/tailscaled.sock
+    target: $SNAP_DATA/tailscale-socket
 
 apps:
   derper:
