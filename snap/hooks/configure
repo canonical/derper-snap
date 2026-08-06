@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/bash -e
 
 # Register config variables if unset,
 # so users can see available variables by running
@@ -7,6 +7,8 @@
 [ -z "$(snapctl get hostname)" ] && snapctl set hostname=
 [ -z "$(snapctl get stun-port)" ] && snapctl set stun-port=
 [ -z "$(snapctl get verify-clients)" ] && snapctl set verify-clients=false
+[ -z "$(snapctl get certmode)" ] && snapctl set certmode=letsencrypt
+[ -z "$(snapctl get certdir)" ] && snapctl set certdir=
 
 
 # For validating boolean options that must be "true" or "false"
@@ -23,4 +25,33 @@ validate_bool() {
     fi
 }
 
+validate_certmode() {
+    certmode="$(snapctl get certmode)"
+    certdir="$(snapctl get certdir)"
+    hostname="$(snapctl get hostname)"
+
+    case "$certmode" in
+        letsencrypt) ;;
+        manual)
+            [ -n "$certdir" ] ||
+                { echo '"certdir" is required when "certmode" is "manual"' >&2; exit 1; }
+            [ -n "$hostname" ] ||
+                { echo '"hostname" is required when "certmode" is "manual"' >&2; exit 1; }
+            ;;
+        *)
+            echo "\"$certmode\" is not a valid certmode value" >&2
+            exit 1
+            ;;
+    esac
+
+    case "$certdir" in
+        "" ) ;;
+        /*|..|../*|*/..|*"/../"* )
+            echo '"certdir" must be relative to $SNAP_COMMON' >&2
+            exit 1
+            ;;
+    esac
+}
+
 validate_bool verify-clients
+validate_certmode
