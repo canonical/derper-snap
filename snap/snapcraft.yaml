@@ -1,12 +1,15 @@
 name: derper
+title: DERP Server for Tailscale
 base: core24
 version: 1.82.0
 license: BSD-3-Clause
 grade: stable
 confinement: strict
+icon: snap/local/tailscale-icon.svg
 contact: solutions-engineering@lists.canonical.com
 issues: https://github.com/canonical/derper-snap/issues
 source-code: https://github.com/canonical/derper-snap
+website: https://tailscale.com/kb/1118/custom-derp-servers
 summary: DERP Server for Tailscale
 description: |
   Derper is a self hosted DERP (Designated Encrypted Relay for Packets) server, designed to be used with Tailscale.
